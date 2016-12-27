@@ -27,7 +27,11 @@ export const InteractiveChat = (props) => {
 
   const optionNodes = props.options.map((option, idx) => {
     return (
-      <a onClick={() => {props.onSubmit(option.title)}} key={uuid.v4()}>
+      <a
+        href='javascript: void(0)'
+        onClick={() => {props.onSubmit(option.title)}}
+        key={uuid.v4()}
+      >
         <Segment color='teal'>{option.title}</Segment>
       </a>
     );
