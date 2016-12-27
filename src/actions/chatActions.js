@@ -4,28 +4,28 @@ export function chatAddMessage(message) {
   return function (dispatch) {
     console.log('Adding new message:');
     console.log(message);
-    const msg = {
-      author: 'Visitor',
-      message: message,
-    };
+
     const pmsg = {
-      author: 'Visitor',
+      author: message.author,
       message: '...',
     };
 
     setTimeout(() => dispatch({
         type: types.CHAT_REPLACE_LAST_MESSAGE,
         payload: {
-          message: msg,
+          message: message,
         },
       })
-    , 500);
+    , Math.random()*1000);
 
-    dispatch({
-      type: types.CHAT_ADD_MESSAGE,
-      payload: {
-        message: pmsg,
-      },
+    return new Promise((resolve, reject) => {
+      dispatch({
+        type: types.CHAT_ADD_MESSAGE,
+        payload: {
+          message: pmsg,
+        },
+      });
+      resolve();
     });
   };
 }
