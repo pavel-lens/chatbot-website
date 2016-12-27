@@ -1,5 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
+import waterfall from 'promise-waterfall';
+
 import {
   chatAddMessage,
   chatSetOptions,
@@ -45,36 +47,121 @@ const conversation = {
   },
 };
 
+const transitions = [
+  {
+    pattern: null,
+    messages: [
+      {
+        author: 'Pavel',
+        message: 'Hi!',
+      },
+      {
+        author: 'Pavel',
+        message: 'My name is Pavel',
+      },
+      {
+        author: 'Pavel',
+        message: '.. what brought you here?',
+      },
+    ],
+    options: [
+      {
+        title: 'Javascript/ReactJS development',
+      },
+      {
+        title: 'Python development',
+      },
+      {
+        title: 'What do you read?',
+      },
+    ],
+  },
+  {
+    pattern: 'Python development',
+    messages: [
+      {
+        author: 'Pavel',
+        message: 'Great! I\'ve been programming in Python for years!',
+      },
+      {
+        author: 'Pavel',
+        message: 'What specifically interest you?',
+      },
+    ],
+    options: [
+      {
+        title: 'Django'
+      },
+      {
+        title: 'SqlAlchemy'
+      },
+      {
+        title: 'Data processing'
+      },
+    ]
+  },
+];
+
+function getTransitionByPattern (transitions, pattern) {
+  return transitions.reduce((res, t) => {
+    if (t.pattern === pattern) {
+      return t;
+    }
+  }, null);
+}
+
+function chatWithVisitor(transition, dispatch) {
+  return new Promise((resolve, reject) => {
+    const messages = transition.messages;
+    const options = transition.options || [];
+    const promises = messages.map((m, idx) => () => dispatch(chatAddMessage(messages[idx], true)));
+
+    return waterfall(promises)
+      .then(() => {
+        if (!!options) {
+          return dispatch(chatSetOptions(options));
+        }
+        resolve();
+      });
+  });
+}
+
 
 class HomePageContainer extends React.Component {
+  constructor(props) {
+    super();
+    // handleOnChatSubmit.bind(this);
+  }
+
   componentDidMount() {
     console.log('HOME APP MOUNT');
-
     const dispatch = this.props.dispatch;
-    // const dispatch(chatAddMessage = this.props.addPavelMessage;
-    const messages = conversation.chat.messages;
-    // const idx = 0;
 
     new Promise((resolve, reject) => {
         setTimeout(resolve, 1500);
       })
       .then(() => {
-        console.log('Resolve(0)');
-        return dispatch(chatAddMessage(messages[0]));
+        return chatWithVisitor(transitions[0], dispatch);
       })
       .then(() => {
-        console.log('Resolve(1)');
-        return dispatch(chatAddMessage(messages[1]));
-      })
-      .then(() => {
-        console.log('Resolve(2)');
-        return dispatch(chatAddMessage(messages[2]));
-      })
-      .then(() => {
-        dispatch(chatSetOptions(conversation.chat.options));
-      })
+        console.log('FINISH FIRST MESSAGE SEQUENCE');
+      });
 
-    // readMessage(messages, 0, this.props.addPavelMessage);
+  }
+
+  handleOnChatSubmit(message) {
+    const dispatch = this.props.dispatch;
+    const transition = getTransitionByPattern(transitions, message);
+
+    dispatch(chatAddMessage({author: 'Visitor', message}));
+    dispatch(chatSetOptions([]));
+
+    if (transition) {
+      chatWithVisitor(transition, dispatch);
+    }
+    else {
+      dispatch(chatAddMessage({author: 'Pavel', message: '== dead end =='}));
+    }
 
   }
 
@@ -82,7 +169,7 @@ class HomePageContainer extends React.Component {
     return (
       <HomePage
         chat={this.props.chat}
-        handleOnChatSubmit={this.props.handleOnChatSubmit}
+        onChatSubmit={this.handleOnChatSubmit.bind(this)}
       />
     );
   }
@@ -100,10 +187,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    // actions: bindActionCreators(actions, dispatch)
     dispatch,
-    handleOnChatSubmit: (message) => dispatch(chatAddMessage({author: 'Visitor', message})),
-    addPavelMessage: (message) => {return dispatch(chatAddMessage(message))},
   };
 }
 
