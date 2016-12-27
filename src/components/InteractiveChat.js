@@ -5,7 +5,7 @@ import { Button, Card, Container, Divider, Grid, Icon, Image, Segment } from 'se
 const getSegmentProps = (message) => ({
   floated: message.author === 'Pavel' ? 'left' : 'right',
   inverted: message.author === 'Pavel' ? false : true,
-  color: message.author === 'Pavel' ? null : 'teal',
+  color: message.author === 'Pavel' ? null : 'blue',
   loading: !!message.loading ? true : false,
   style: getSegmentStyle(message),
 });
@@ -35,7 +35,7 @@ export const InteractiveChat = (props) => {
         onClick={() => {props.onSubmit(option.title)}}
         key={uuid.v4()}
       >
-        <Segment color='teal'>{option.title}</Segment>
+        <Segment color='blue'>{option.title}</Segment>
       </a>
     );
   });
