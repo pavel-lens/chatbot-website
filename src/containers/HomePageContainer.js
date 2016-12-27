@@ -1,16 +1,60 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-// import {bindActionCreators} from 'redux';
 import { chatAddMessage } from '../actions/chatActions';
 import HomePage from '../components/HomePage';
 
-export const HomePageContainer = (props) => {
-  return (
-    <HomePage
-      chat={props.chat}
-      handleOnChatSubmit={props.handleOnChatSubmit}
-    />
-  );
+const conversation = {
+  chat: {
+    messages: [
+      {
+        author: 'Pavel',
+        message: 'Hi!',
+      },
+      {
+        author: 'Pavel',
+        message: 'My name is Pavel',
+      },
+      {
+        author: 'Pavel',
+        message: '.. what brought you here?',
+      },
+      {
+        author: 'Visitor',
+        message: '...',
+      },
+      {
+        author: 'Pavel',
+        message: 'What are you interested in?',
+        loading: false,
+      },
+    ],
+    options: [
+      {
+        title: 'Javascript/ReactJS development',
+      },
+      {
+        title: 'Python development',
+      },
+      {
+        title: 'What do you read?',
+      },
+    ],
+  },
+};
+
+class HomePageContainer extends React.Component {
+  componentDidMount() {
+    console.log('HOME APP MOUNT');
+  }
+
+  render() {
+    return (
+      <HomePage
+        chat={this.props.chat}
+        handleOnChatSubmit={this.props.handleOnChatSubmit}
+      />
+    );
+  }
 };
 
 HomePageContainer.propTypes = {
@@ -26,7 +70,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // actions: bindActionCreators(actions, dispatch)
-    handleOnChatSubmit: (message) => dispatch(chatAddMessage(message)),
+    handleOnChatSubmit: (message) => dispatch(chatAddMessage({author: 'Visitor', message})),
   };
 }
 
