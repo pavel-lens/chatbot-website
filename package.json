@@ -1,7 +1,7 @@
 {
-  "name": "react-slingshot",
-  "version": "5.0.0",
-  "description": "Starter kit for creating apps with React and Redux",
+  "name": "chatbot-website",
+  "version": "1.0.0",
+  "description": "Personal Chatbot Website | Pavel Svitek build with React and Redux",
   "engines": {
     "npm": ">=3"
   },
@@ -116,6 +116,6 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/coryhouse/react-slingshot"
+    "url": "https://github.com/svitekpavel/chatbot-website"
   }
 }
