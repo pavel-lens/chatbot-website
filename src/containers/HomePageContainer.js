@@ -1,6 +1,9 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { chatAddMessage } from '../actions/chatActions';
+import {
+  chatAddMessage,
+  chatSetOptions,
+  } from '../actions/chatActions';
 import HomePage from '../components/HomePage';
 
 const conversation = {
@@ -42,9 +45,37 @@ const conversation = {
   },
 };
 
+
 class HomePageContainer extends React.Component {
   componentDidMount() {
     console.log('HOME APP MOUNT');
+
+    const dispatch = this.props.dispatch;
+    // const dispatch(chatAddMessage = this.props.addPavelMessage;
+    const messages = conversation.chat.messages;
+    // const idx = 0;
+
+    new Promise((resolve, reject) => {
+        setTimeout(resolve, 1500);
+      })
+      .then(() => {
+        console.log('Resolve(0)');
+        return dispatch(chatAddMessage(messages[0]));
+      })
+      .then(() => {
+        console.log('Resolve(1)');
+        return dispatch(chatAddMessage(messages[1]));
+      })
+      .then(() => {
+        console.log('Resolve(2)');
+        return dispatch(chatAddMessage(messages[2]));
+      })
+      .then(() => {
+        dispatch(chatSetOptions(conversation.chat.options));
+      })
+
+    // readMessage(messages, 0, this.props.addPavelMessage);
+
   }
 
   render() {
@@ -70,7 +101,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     // actions: bindActionCreators(actions, dispatch)
+    dispatch,
     handleOnChatSubmit: (message) => dispatch(chatAddMessage({author: 'Visitor', message})),
+    addPavelMessage: (message) => {return dispatch(chatAddMessage(message))},
   };
 }
 

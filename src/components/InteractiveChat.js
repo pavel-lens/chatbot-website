@@ -19,9 +19,12 @@ export const InteractiveChat = (props) => {
   const messageNodes = props.messages.map((message) => {
     const props = getSegmentProps(message);
     return (
-      <Segment clearing key={uuid.v4()} {...props}>
-        <p>{message.message}</p>
-      </Segment>
+      <div key={uuid.v4()}>
+        <Segment key={uuid.v4()} {...props}>
+          <p>{message.message}</p>
+        </Segment>
+        <div style={{clear: 'both'}}/>
+      </div>
     );
   });
 
@@ -41,7 +44,6 @@ export const InteractiveChat = (props) => {
     <div>
       {messageNodes}
       <div style={{clear: 'both'}}/>
-      <Divider/>
       { !!props.options.length &&
         <Segment.Group horizontal>
           {optionNodes}
