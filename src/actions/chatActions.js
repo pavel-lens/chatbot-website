@@ -1,10 +1,12 @@
 import * as types from '../constants/actionTypes';
 
+const CHAT_DELAYS = 1;
+
 export function chatAddMessage(message, delayed=false) {
   return function (dispatch) {
     return new Promise((resolve, reject) => {
-      console.log('Adding new message:');
-      console.log(message);
+      // console.log('Adding new message:');
+      // console.log(message);
       const wordCount = message.message.split ? message.message.split(' ').length : Math.random()*7;
 
       const pmsg = {
@@ -16,12 +18,12 @@ export function chatAddMessage(message, delayed=false) {
       if (delayed) {
         setTimeout(() => {
           dispatch({ type: types.CHAT_ADD_MESSAGE, payload: { message: pmsg } });
-        }, 500+(Math.random()*0.5));
+        }, CHAT_DELAYS*(500+(Math.random()*0.5)));
 
         setTimeout(() => {
           dispatch({ type: types.CHAT_REPLACE_LAST_MESSAGE, payload: { message: message } });
           resolve();
-        }, 800+((Math.random()+0.2)*(wordCount*500)));
+        }, CHAT_DELAYS*(800+((Math.random()+0.2)*(wordCount*500))));
 
       // Display message instantly
       } else {
