@@ -2,26 +2,31 @@ import React from 'react';
 import uuid from 'uuid';
 import { Button, Card, Container, Divider, Grid, Icon, Image, Segment } from 'semantic-ui-react';
 
-const getSegmentProps = (message) => ({
+const getMessageProps = (message) => ({
   floated: message.author === 'Pavel' ? 'left' : 'right',
   inverted: message.author === 'Pavel' ? false : true,
   color: message.author === 'Pavel' ? null : 'blue',
   loading: !!message.loading ? true : false,
-  style: getSegmentStyle(message),
+  style: getMessageStyle(message),
 });
 
-const getSegmentStyle = (message) => ({
+const getMessageStyle = (message) => ({
   marginLeft: (message.author === 'Pavel' ? 'auto' : '20px'),
   marginRight: (message.author === 'Pavel' ? '20px' : 'auto'),
 });
 
+const getOptionStyle = () => ({
+  display: 'inline-block',
+  marginLeft: '5px',
+});
+
 export const InteractiveChat = (props) => {
   const messageNodes = props.messages.map((message) => {
-    const props = getSegmentProps(message);
+    const props = getMessageProps(message);
     return (
       <div key={uuid.v4()}>
         <Segment key={uuid.v4()} {...props}>
-          <p>{message.message}</p>
+          {message.message}
         </Segment>
         <div style={{clear: 'both'}}/>
       </div>
@@ -35,7 +40,7 @@ export const InteractiveChat = (props) => {
         onClick={() => {props.onSubmit(option.title)}}
         key={uuid.v4()}
       >
-        <Segment color='blue'>{option.title}</Segment>
+        <Segment color='blue' style={getOptionStyle()}>{option.title}</Segment>
       </a>
     );
   });
@@ -45,9 +50,9 @@ export const InteractiveChat = (props) => {
       {messageNodes}
       <div style={{clear: 'both'}}/>
       { !!props.options.length &&
-        <Segment.Group horizontal>
+        <div style={{textAlign: 'center'}}>
           {optionNodes}
-        </Segment.Group>
+        </div>
       }
     </div>
   );
