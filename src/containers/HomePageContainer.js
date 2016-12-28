@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import waterfall from 'promise-waterfall';
 
-import transitions from './chatTransitions'
+import chatTransitions from './chatTransitions'
 
 import {
   chatAddMessage,
@@ -16,6 +16,7 @@ function getTransitionByPattern (transitions, pattern) {
     if (t.pattern === pattern) {
       return t;
     }
+    return res;
   }, null);
 }
 
@@ -50,7 +51,7 @@ class HomePageContainer extends React.Component {
         setTimeout(resolve, 1500);
       })
       .then(() => {
-        return chatWithVisitor(transitions[0], dispatch);
+        return chatWithVisitor(chatTransitions[0], dispatch);
       })
       .then(() => {
         console.log('FINISH FIRST MESSAGE SEQUENCE');
@@ -60,9 +61,12 @@ class HomePageContainer extends React.Component {
 
   handleOnChatSubmit(message) {
     const dispatch = this.props.dispatch;
-    const transition = getTransitionByPattern(transitions, message);
+    const goto = message.goto ? message.goto : message.title;
+    const transition = getTransitionByPattern(chatTransitions, goto);
 
-    dispatch(chatAddMessage({author: 'Visitor', message}));
+    console.log('TRANSITION::' + goto);
+
+    dispatch(chatAddMessage({author: 'Visitor', message: message.title}));
     dispatch(chatSetOptions([]));
 
     if (transition) {

@@ -37,7 +37,7 @@ export const InteractiveChat = (props) => {
     return (
       <a
         href='javascript: void(0)'
-        onClick={() => {props.onSubmit(option.title)}}
+        onClick={() => {props.onSubmit(option)}}
         key={uuid.v4()}
       >
         <Segment color='blue' style={getOptionStyle()}>{option.title}</Segment>
