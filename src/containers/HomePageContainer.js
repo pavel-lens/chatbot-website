@@ -2,105 +2,14 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import waterfall from 'promise-waterfall';
 
+import transitions from './chatTransitions'
+
 import {
   chatAddMessage,
   chatSetOptions,
   } from '../actions/chatActions';
 import HomePage from '../components/HomePage';
 
-const conversation = {
-  chat: {
-    messages: [
-      {
-        author: 'Pavel',
-        message: 'Hi!',
-      },
-      {
-        author: 'Pavel',
-        message: 'My name is Pavel',
-      },
-      {
-        author: 'Pavel',
-        message: '.. what brought you here?',
-      },
-      {
-        author: 'Visitor',
-        message: '...',
-      },
-      {
-        author: 'Pavel',
-        message: 'What are you interested in?',
-        loading: false,
-      },
-    ],
-    options: [
-      {
-        title: 'Javascript/ReactJS development',
-      },
-      {
-        title: 'Python development',
-      },
-      {
-        title: 'What do you read?',
-      },
-    ],
-  },
-};
-
-const transitions = [
-  {
-    pattern: null,
-    messages: [
-      {
-        author: 'Pavel',
-        message: 'Hi!',
-      },
-      {
-        author: 'Pavel',
-        message: 'My name is Pavel',
-      },
-      {
-        author: 'Pavel',
-        message: '.. what brought you here?',
-      },
-    ],
-    options: [
-      {
-        title: 'Javascript/ReactJS development',
-      },
-      {
-        title: 'Python development',
-      },
-      {
-        title: 'What do you read?',
-      },
-    ],
-  },
-  {
-    pattern: 'Python development',
-    messages: [
-      {
-        author: 'Pavel',
-        message: 'Great! I\'ve been programming in Python for years!',
-      },
-      {
-        author: 'Pavel',
-        message: 'What specifically interest you?',
-      },
-    ],
-    options: [
-      {
-        title: 'Django'
-      },
-      {
-        title: 'SqlAlchemy'
-      },
-      {
-        title: 'Data processing'
-      },
-    ]
-  },
-];
 
 function getTransitionByPattern (transitions, pattern) {
   return transitions.reduce((res, t) => {
