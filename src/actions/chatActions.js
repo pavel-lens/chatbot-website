@@ -5,7 +5,7 @@ export function chatAddMessage(message, delayed=false) {
     return new Promise((resolve, reject) => {
       console.log('Adding new message:');
       console.log(message);
-      const wordCount = message.message.split(' ').length;
+      const wordCount = message.message.split ? message.message.split(' ').length : Math.random()*7;
 
       const pmsg = {
         author: message.author,
