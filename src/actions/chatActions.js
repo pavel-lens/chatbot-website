@@ -14,7 +14,9 @@ export function chatAddMessage(message, delayed=false) {
 
       // Delayed message to illustrate user behavior
       if (delayed) {
-        dispatch({ type: types.CHAT_ADD_MESSAGE, payload: { message: pmsg } });
+        setTimeout(() => {
+          dispatch({ type: types.CHAT_ADD_MESSAGE, payload: { message: pmsg } });
+        }, 500+(Math.random()*0.5));
 
         setTimeout(() => {
           dispatch({ type: types.CHAT_REPLACE_LAST_MESSAGE, payload: { message: message } });
