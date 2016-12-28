@@ -11,10 +11,10 @@ const HomePage = (props) => {
       <h1>Pavel Svitek | Javascript/ReactJS, Python developer</h1>
 
       <Grid columns={2}>
-        <Grid.Column width={6}>
+        <Grid.Column width={4}>
           <PersonalCard/>
         </Grid.Column>
-        <Grid.Column width={10}>
+        <Grid.Column width={12}>
           <InteractiveChat
             messages={props.chat.messages}
             options={props.chat.options}
