@@ -25,10 +25,19 @@ h2 {
 	color: $vin-blue;
 }
 
-.savings { color: $vin-green; }
-.loss { color: $vin-red; }
-input.small { width: 46px; }
-td.fuel-savings-label { width: 175px; }
+.technology {
+  padding: 2px 5px;
+
+  .icon {
+    width: 75px;
+    height: auto;
+  }
+
+  .title {
+    text-align: center;
+    font-weight: bolder;
+  }
+}
 
 /* Related to Elemental UI */
 .ui.inverted.segment a {
