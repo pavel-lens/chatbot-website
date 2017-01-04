@@ -22,8 +22,7 @@ export const PersonalCard = () => (
     </Card.Content>
     <Card.Content extra>
       <a href="https://www.linkedin.com/in/pavelsvitek"><Icon name='linkedin'/></a>
-      <Icon name='twitter'/>
-      <Icon name='facebook'/>
+      <a href="https://twitter.com/svitekpavel"><Icon name='twitter'/></a>
     </Card.Content>
   </Card>
 );
