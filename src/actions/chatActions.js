@@ -18,12 +18,12 @@ export function chatAddMessage(message, delayed=false) {
       if (delayed) {
         setTimeout(() => {
           dispatch({ type: types.CHAT_ADD_MESSAGE, payload: { message: pmsg } });
-        }, CHAT_DELAYS*(500+(Math.random()*0.5)));
+        }, CHAT_DELAYS*(350+(Math.random()*0.5)));
 
         setTimeout(() => {
           dispatch({ type: types.CHAT_REPLACE_LAST_MESSAGE, payload: { message: message } });
           resolve();
-        }, CHAT_DELAYS*(800+((Math.random()+0.2)*(wordCount*500))));
+        }, CHAT_DELAYS*(700+((Math.random()+0.2)*(wordCount*200))));
 
       // Display message instantly
       } else {
