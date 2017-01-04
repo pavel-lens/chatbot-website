@@ -2,6 +2,17 @@
 import React from 'react'
 import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react';
 
+import { TechIcon } from '../components/TechIcon'
+
+import ReactLogo from './../static/images/react-logo.png'
+import ReduxLogo from './../static/images/redux-logo.png'
+import MochaLogo from './../static/images/mocha-logo.svg'
+import ChaiLogo from './../static/images/chai-logo.png'
+import ES6Logo from './../static/images/es6-logo.png'
+import WebpackLogo from './../static/images/webpack-logo.png'
+import PythonLogo from './../static/images/python-logo.png'
+import DjangoLogo from './../static/images/django-logo.png'
+
 export default [
   {
     pattern: null,
@@ -21,7 +32,7 @@ export default [
     ],
     options: [
       {
-        title: 'Programming generally..',
+        title: 'Programming',
         goto: 'programming-generally',
       },
       {
@@ -40,6 +51,54 @@ export default [
           "Let me start with the fact that I enjoy programming in Python",
           "and Javascript.. ",
         ].join(' '),
+      },
+    ],
+    options: [
+      {
+        title: "Okay, what's your programming stack?",
+        goto: 'programming-stack'
+      },
+      {
+        title: 'Ahh, whatever..',
+        goto: 'more-about-pavel',
+      }
+    ],
+  },
+  {
+    pattern: 'programming-stack',
+    messages: [
+      {
+        author: 'Pavel',
+        message: [
+          "Currently I code day-to-day in Javascript/React.",
+          "Here is my current Javascript stack:",
+        ].join(' '),
+      },
+      {
+        author: 'Pavel',
+        message:
+          <div>
+            <TechIcon title="ReactJS" icon={ReactLogo}/>
+            <TechIcon title="Redux" icon={ReduxLogo}/>
+            <TechIcon title="Mocha" icon={MochaLogo}/>
+            <TechIcon title="Chai" icon={ChaiLogo}/>
+            <TechIcon title="ES6" icon={ES6Logo}/>
+            <TechIcon title="Webpack" icon={WebpackLogo}/>
+          </div>
+      },
+      {
+        author: 'Pavel',
+        message: [
+          "And this is what I've used in Python:",
+        ].join(' '),
+      },
+      {
+        author: 'Pavel',
+        message:
+          <div>
+            <TechIcon title="Python" icon={PythonLogo}/>
+            <TechIcon title="Django" icon={DjangoLogo}/>
+          </div>
       },
       {
         author: 'Pavel',
@@ -102,14 +161,20 @@ export default [
     messages: [
       {
         author: 'Pavel',
-        message:  <div>Awesome! Drop me a message to
-                    <a href="mailto:pavel@pavelsvitek.com?subject=Python+project">pavel@pavelsvitek.com</a>
-                    and I will get back to you..
-                  </div>,
+        message:
+          <div>
+            {'Awesome! Drop me a message to '}
+            <a href="mailto:pavel@pavelsvitek.com?subject=Python+project">pavel@pavelsvitek.com</a>
+            {' and I will get back to you..'},
+          </div>,
       },
       {
         author: 'Pavel',
-        message: '..what specifically interest you?',
+        message: 'Thanks for the interest.. I will get back to you as soon as possible!',
+      },
+      {
+        author: 'Pavel',
+        message: 'Have a great day!',
       },
     ],
   },
@@ -175,6 +240,10 @@ export default [
       {
         title: <a href="https://medium.com/@svitekpavel" target="_blank">Show me your blogs</a>,
         goto: 'a-coder',
+      },
+      {
+        title: "Okay, what do you develop in now?",
+        goto: 'programming-stack'
       },
       {
         title: 'Ok, whatever..',
