@@ -23,7 +23,7 @@ const HomePage = (props) => {
         </Grid.Column>
       </Grid>
 
-      <h2>My story</h2>
+      {/*<h2>My story</h2>
       <p>
         I began my personal transformation at the time I turned 25. Firstly,
         I read a book Multiple streams of Income, which inspired me to think
@@ -46,7 +46,7 @@ const HomePage = (props) => {
       <p>
         Therefore I know, that if you open your eyes, you will find amazing
         world of opportunities that are awaiting you.
-      </p>
+      </p>*/}
     </div>
   );
 };
