@@ -18,6 +18,7 @@ const HomePage = (props) => {
           <InteractiveChat
             messages={props.chat.messages}
             options={props.chat.options}
+            showUserInput={props.chat.showUserInput}
             onSubmit={props.onChatSubmit}
           />
         </Grid.Column>

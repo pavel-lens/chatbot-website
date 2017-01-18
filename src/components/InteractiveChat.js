@@ -33,6 +33,10 @@ export const InteractiveChat = (props) => {
     );
   });
 
+  const optionsGetInput = (options) => {
+    return options.find((o) => o.type === 'input');
+  }
+
   const optionNodes = props.options.map((option) => {
     return (
       <a
@@ -44,6 +48,10 @@ export const InteractiveChat = (props) => {
       </a>
     );
   });
+
+  const handleKeyPress = (event) => {
+    console.log(event);
+  };
 
   return (
     <div>
@@ -62,4 +70,9 @@ InteractiveChat.propTypes = {
   messages: React.PropTypes.array,
   options: React.PropTypes.array,
   onSubmit: React.PropTypes.func,
+};
+
+InteractiveChat.defaultProps = {
+  messages: [],
+  options: [],
 };

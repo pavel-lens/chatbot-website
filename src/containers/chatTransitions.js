@@ -1,3 +1,4 @@
+/* eslint-disable */
 // import React so we can use JXS in this file
 import React from 'react'
 import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react';
@@ -31,6 +32,11 @@ export default [
       },
     ],
     options: [
+      {
+        type: 'input',
+        title: 'Write me your email',
+        goto: 'finish-conversation',
+      },
       {
         title: 'Programming',
         goto: 'programming-generally',
@@ -287,3 +293,4 @@ export default [
     ],
   },
 ];
+/* eslint-enable */
