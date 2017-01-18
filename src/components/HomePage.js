@@ -1,9 +1,9 @@
 import React from 'react';
-import {Link} from 'react-router';
-import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react';
+// import { Link } from 'react-router';
+import { Grid } from 'semantic-ui-react';
 
-import { PersonalCard } from './PersonalCard'
-import { InteractiveChat } from './InteractiveChat'
+import { PersonalCard } from './PersonalCard';
+import { InteractiveChat } from './InteractiveChat';
 
 const HomePage = (props) => {
   return (
@@ -49,6 +49,11 @@ const HomePage = (props) => {
       </p>*/}
     </div>
   );
+};
+
+HomePage.propTypes = {
+  chat: React.PropTypes.object.isRequired,
+  onChatSubmit: React.PropTypes.func,
 };
 
 export default HomePage;

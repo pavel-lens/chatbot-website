@@ -1,12 +1,12 @@
 import React from 'react';
 import uuid from 'uuid';
-import { Button, Card, Container, Divider, Grid, Icon, Image, Segment } from 'semantic-ui-react';
+import { Segment } from 'semantic-ui-react';
 
 const getMessageProps = (message) => ({
   floated: message.author === 'Pavel' ? 'left' : 'right',
   inverted: message.author === 'Pavel' ? false : true,
   color: message.author === 'Pavel' ? null : 'blue',
-  loading: !!message.loading ? true : false,
+  loading: message.loading ? true : false,
   style: getMessageStyle(message),
 });
 
@@ -33,14 +33,14 @@ export const InteractiveChat = (props) => {
     );
   });
 
-  const optionNodes = props.options.map((option, idx) => {
+  const optionNodes = props.options.map((option) => {
     return (
       <a
-        href='javascript: void(0)'
-        onClick={() => {props.onSubmit(option)}}
+        href="javascript: void(0)"
+        onClick={() => { props.onSubmit(option); }}
         key={uuid.v4()}
       >
-        <Segment color='blue' style={getOptionStyle()}>{option.title}</Segment>
+        <Segment color="blue" style={getOptionStyle()}>{option.title}</Segment>
       </a>
     );
   });
@@ -56,4 +56,10 @@ export const InteractiveChat = (props) => {
       }
     </div>
   );
+};
+
+InteractiveChat.propTypes = {
+  messages: React.PropTypes.array,
+  options: React.PropTypes.array,
+  onSubmit: React.PropTypes.func,
 };

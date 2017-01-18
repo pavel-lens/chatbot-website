@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 import waterfall from 'promise-waterfall';
 
-import chatTransitions from './chatTransitions'
+import chatTransitions from './chatTransitions';
 
 import {
   chatAddMessage,
@@ -21,14 +21,14 @@ function getTransitionByPattern (transitions, pattern) {
 }
 
 function chatWithVisitor(transition, dispatch) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     const messages = transition.messages;
     const options = transition.options || [];
     const promises = messages.map((m, idx) => () => dispatch(chatAddMessage(messages[idx], true)));
 
     return waterfall(promises)
       .then(() => {
-        if (!!options) {
+        if (options) {
           return dispatch(chatSetOptions(options));
         }
         resolve();
@@ -39,7 +39,7 @@ function chatWithVisitor(transition, dispatch) {
 
 class HomePageContainer extends React.Component {
   constructor(props) {
-    super();
+    super(props);
     // handleOnChatSubmit.bind(this);
   }
 
@@ -47,7 +47,7 @@ class HomePageContainer extends React.Component {
     console.log('HOME APP MOUNT');
     const dispatch = this.props.dispatch;
 
-    new Promise((resolve, reject) => {
+    new Promise((resolve) => {
         setTimeout(resolve, 1500);
       })
       .then(() => {
@@ -86,9 +86,11 @@ class HomePageContainer extends React.Component {
       />
     );
   }
-};
+}
 
 HomePageContainer.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  chat: PropTypes.object.isRequired,
   // actions: PropTypes.object.isRequired,
 };
 
