@@ -1,9 +1,11 @@
 import React from 'react';
 import { Button, Card, Container, Grid, Icon, Image } from 'semantic-ui-react';
 
+import assetPhoto from './pavel-svitek-photo.jpg';
+
 export const PersonalCard = () => (
   <Card>
-    <Image src='https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/2/005/092/324/264bf24.jpg' />
+    <Image src={assetPhoto} />
     <Card.Content>
       <Card.Header>
         Pavel Svitek
